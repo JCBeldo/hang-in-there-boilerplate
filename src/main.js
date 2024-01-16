@@ -1,4 +1,8 @@
 // query selector variables go here 👇
+const showRandom = document.querySelector('#show-random');
+const posterImage = document.querySelector('.poster-img');
+const posterTitle = document.querySelector('.poster-title');
+const posterQuote = document.querySelector('.poster-quote');
 
 // we've provided you with some data to work with 👇
 var images = [
@@ -115,4 +119,21 @@ function createPoster(imageURL, title, quote) {
     imageURL: imageURL, 
     title: title, 
     quote: quote}
+  }
+  
+  // initialize buttons
+  // save-poster.onclick = ;
+  // show-saved.onclick = goCave;
+  // show-form.onclick = fightDragon;
+showRandom.onclick = updatePoster();
+
+function updatePoster() {
+  var poster = createPoster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)]);
+  posterImage.src = poster.imageURL;
+  posterTitle.innerText = poster.title;
+  posterQuote.innerText = poster.quote;
+  // window.location.reload(1);
+  // location=URL;
+  // window.location=window.location;
+  // history.go(0);
 }
