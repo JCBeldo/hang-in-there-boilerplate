@@ -15,6 +15,7 @@ const backToMain = document.querySelector('.back-to-main');
 const savedPostersView = document.querySelector('.saved-posters')
 const posterForm = document.querySelector('.poster-form')
 
+
 // we've provided you with some data to work with 👇
 var images = [
   "./assets/bees.jpg",
@@ -127,6 +128,7 @@ showForm.onclick = function() {unhideForm()};
 backToMain.onclick = function() {unhideSaved()};
 showMain.onclick = function() {unhideForm()};
 
+
 // event listeners go here 👇
 
 // functions and event handlers go here 👇
@@ -149,7 +151,7 @@ function createPoster(imageURL, title, quote) {
     title: title, 
     quote: quote}
   }
- 
+
 function unhideSaved() {
   savedPostersView.classList.toggle('hidden')
   mainPoster.classList.toggle('hidden')
