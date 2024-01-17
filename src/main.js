@@ -1,11 +1,20 @@
 // query selector variables go here 👇
-const showRandom = document.querySelector(".show-random");
-const posterImage = document.querySelector(".poster-img");
-const posterTitle = document.querySelector(".poster-title");
-const posterQuote = document.querySelector(".poster-quote");
-const showForm = document.querySelector(".show-form")
-const posterForm = document.querySelector(".poster-form")
-const mainPoster = document.querySelector(".main-poster")
+// main poster
+const posterImage = document.querySelector('.poster-img');
+const posterTitle = document.querySelector('.poster-title');
+const posterQuote = document.querySelector('.poster-quote');
+const mainPoster = document.querySelector('.main-poster');
+//buttons
+const savePoster = document.querySelector('.save-poster');
+const showSaved = document.querySelector('.show-saved');
+const showRandom = document.querySelector('.show-random');
+const showForm = document.querySelector('.show-form');
+const showMain = document.querySelector('.show-main');
+const backToMain = document.querySelector('.back-to-main');
+// pages/forms
+const savedPostersView = document.querySelector('.saved-posters')
+const posterForm = document.querySelector('.poster-form')
+
 
 // we've provided you with some data to work with 👇
 var images = [
@@ -106,11 +115,19 @@ var quotes = [
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
 var savedPosters = [];
-var currentPoster;
-var poster = createPoster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)]);
-  posterImage.src = poster.imageURL;
-  posterTitle.innerText = poster.title;
-  posterQuote.innerText = poster.quote;
+var currentPoster = createPoster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)]);
+posterImage.src = currentPoster.imageURL;
+posterTitle.innerText = currentPoster.title;
+posterQuote.innerText = currentPoster.quote;;
+
+// initialize buttons
+showSaved.onclick = function() {unhideSaved()};
+showRandom.onclick = function() {updatePoster()};
+showForm.onclick = function() {unhideForm()};
+// savePoster.onclick = ;
+backToMain.onclick = function() {unhideSaved()};
+showMain.onclick = function() {unhideForm()};
+
 
 // event listeners go here 👇
 
@@ -134,11 +151,15 @@ function createPoster(imageURL, title, quote) {
     title: title, 
     quote: quote
   }
+
+function unhideSaved() {
+  savedPostersView.classList.toggle('hidden')
+  mainPoster.classList.toggle('hidden')
 }
 
-function makePoster() {
-  // !posterForm.hidden;
-  mainPoster.display = 'block'
+function unhideForm() {
+  posterForm.classList.toggle('hidden')
+  mainPoster.classList.toggle('hidden')
 }
 
 function updatePoster() {
@@ -147,8 +168,4 @@ function updatePoster() {
   posterImage.src = poster.imageURL;
   posterTitle.innerText = poster.title;
   posterQuote.innerText = poster.quote;
-  // window.location.reload(1);
-  // location=URL;
-  // window.location=window.location;
-  // history.go(0);
 }
