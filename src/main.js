@@ -134,12 +134,6 @@ showMain.onclick = function() {unhideForm()};
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
 
-// initialize buttons
-showRandom.onclick = function() {updatePoster()};
-showForm.onclick = function() {makePoster()};
-// save-poster.onclick = ;
-// show-saved.onclick = goCave;
-
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
@@ -151,6 +145,7 @@ function createPoster(imageURL, title, quote) {
     title: title, 
     quote: quote
   }
+}
 
 function unhideSaved() {
   savedPostersView.classList.toggle('hidden')
