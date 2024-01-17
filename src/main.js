@@ -15,6 +15,7 @@ const backToMain = document.querySelector('.back-to-main');
 const savedPostersView = document.querySelector('.saved-posters')
 const posterForm = document.querySelector('.poster-form')
 
+
 // we've provided you with some data to work with 👇
 var images = [
   "./assets/bees.jpg",
@@ -127,10 +128,18 @@ showForm.onclick = function() {unhideForm()};
 backToMain.onclick = function() {unhideSaved()};
 showMain.onclick = function() {unhideForm()};
 
+
 // event listeners go here 👇
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
+
+// initialize buttons
+showRandom.onclick = function() {updatePoster()};
+showForm.onclick = function() {makePoster()};
+// save-poster.onclick = ;
+// show-saved.onclick = goCave;
+
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
@@ -140,9 +149,9 @@ function createPoster(imageURL, title, quote) {
     id: Date.now(), 
     imageURL: imageURL, 
     title: title, 
-    quote: quote}
+    quote: quote
   }
- 
+
 function unhideSaved() {
   savedPostersView.classList.toggle('hidden')
   mainPoster.classList.toggle('hidden')
@@ -154,6 +163,7 @@ function unhideForm() {
 }
 
 function updatePoster() {
+  // showRandom.onclick = poster;
   var poster = createPoster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)]);
   posterImage.src = poster.imageURL;
   posterTitle.innerText = poster.title;
