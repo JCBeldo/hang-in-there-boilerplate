@@ -1,8 +1,11 @@
 // query selector variables go here 👇
-const showRandom = document.querySelector('#show-random');
-const posterImage = document.querySelector('.poster-img');
-const posterTitle = document.querySelector('.poster-title');
-const posterQuote = document.querySelector('.poster-quote');
+const showRandom = document.querySelector(".show-random");
+const posterImage = document.querySelector(".poster-img");
+const posterTitle = document.querySelector(".poster-title");
+const posterQuote = document.querySelector(".poster-quote");
+const showForm = document.querySelector(".show-form")
+const posterForm = document.querySelector(".poster-form")
+const mainPoster = document.querySelector(".main-poster")
 
 // we've provided you with some data to work with 👇
 var images = [
@@ -104,11 +107,22 @@ var quotes = [
 ];
 var savedPosters = [];
 var currentPoster;
+var poster = createPoster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)]);
+  posterImage.src = poster.imageURL;
+  posterTitle.innerText = poster.title;
+  posterQuote.innerText = poster.quote;
 
 // event listeners go here 👇
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
+
+// initialize buttons
+showRandom.onclick = function() {updatePoster()};
+showForm.onclick = function() {makePoster()};
+// save-poster.onclick = ;
+// show-saved.onclick = goCave;
+
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
@@ -118,16 +132,17 @@ function createPoster(imageURL, title, quote) {
     id: Date.now(), 
     imageURL: imageURL, 
     title: title, 
-    quote: quote}
+    quote: quote
   }
-  
-  // initialize buttons
-  // save-poster.onclick = ;
-  // show-saved.onclick = goCave;
-  // show-form.onclick = fightDragon;
-showRandom.onclick = updatePoster();
+}
+
+function makePoster() {
+  // !posterForm.hidden;
+  mainPoster.display = 'block'
+}
 
 function updatePoster() {
+  // showRandom.onclick = poster;
   var poster = createPoster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)]);
   posterImage.src = poster.imageURL;
   posterTitle.innerText = poster.title;
