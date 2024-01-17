@@ -131,6 +131,13 @@ showMain.onclick = function() {unhideForm()};
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
+
+// initialize buttons
+showRandom.onclick = function() {updatePoster()};
+showForm.onclick = function() {makePoster()};
+// save-poster.onclick = ;
+// show-saved.onclick = goCave;
+
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
@@ -154,6 +161,7 @@ function unhideForm() {
 }
 
 function updatePoster() {
+  // showRandom.onclick = poster;
   var poster = createPoster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)]);
   posterImage.src = poster.imageURL;
   posterTitle.innerText = poster.title;
