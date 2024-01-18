@@ -15,11 +15,6 @@ const makePoster = document.querySelector('#make-poster');
 // pages/forms
 const savedPostersView = document.querySelector('.saved-posters')
 const posterForm = document.querySelector('.poster-form')
-// form input
-// const userPosterImage = document.querySelector('#poster-image-url').value;
-// const userPosterTitle = document.querySelector('#poster-title').value;
-// const userPosterQuote = document.querySelector('#poster-quote').value;
-
 
 // we've provided you with some data to work with 👇
 var images = [
@@ -120,17 +115,18 @@ var quotes = [
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
 var savedPosters = [];
-var currentPoster = randomPoster
+var currentPoster;
 var randomPoster = createPoster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)]);
 posterImage.src = randomPoster.imageURL;
 posterTitle.innerText = randomPoster.title;
-posterQuote.innerText = randomPoster.quote;;
+posterQuote.innerText = randomPoster.quote;
+currentPoster = randomPoster;
 
 // initialize buttons
-showSaved.onclick = function() {unhideSaved()};
+savePoster.onclick = function() {addPoster()};
+showSaved.onclick = function() {showSavedPosters()};
 showRandom.onclick = function() {updatePoster()};
 showForm.onclick = function() {unhideForm()};
-// savePoster.onclick = ;
 // makePoster.onchange = function() {userPoster()};
 backToMain.onclick = function() {unhideSaved()};
 showMain.onclick = function() {unhideForm()};
@@ -155,16 +151,16 @@ function createPoster(imageURL, title, quote) {
 }
 
 function unhideSaved() {
-  savedPostersView.classList.toggle('hidden')
-  mainPoster.classList.toggle('hidden')
+  savedPostersView.classList.toggle('hidden');
+  mainPoster.classList.toggle('hidden');
 }
 
 function unhideForm() {
-  posterForm.classList.toggle('hidden')
-  mainPoster.classList.toggle('hidden')
+  posterForm.classList.toggle('hidden');
+  mainPoster.classList.toggle('hidden');
 }
 
-function userPoster(event) { //userPosterImage, userPosterTitle, userPosterQuote
+function userPoster(event) {
   event.preventDefault();
   let userPosterImage = document.querySelector('#poster-image-url').value;
   let userPosterTitle = document.querySelector('#poster-title').value;
@@ -175,14 +171,57 @@ function userPoster(event) { //userPosterImage, userPosterTitle, userPosterQuote
   titles.push(poster.title);
   quotes.push(poster.quote);
 
-  console.log(userPosterTitle);
-  // currentPoster = poster
+  currentPoster = poster;
+
   posterImage.src = poster.imageURL;
   posterTitle.innerText = poster.title;
   posterQuote.innerText = poster.quote;
   // posterForm.submit();
   unhideForm();
-  console.log(userPosterQuote);
+}
+
+let savedPosterGrid = document.querySelector('.saved-posters-grid');
+// document.addEventListener('DOMContentLoaded', function() {addPoster()});
+
+function addPoster() {
+  if (!savedPosters.includes(currentPoster)) {
+  savedPosters.push(currentPoster);
+  console.log(savedPosters);
+  }
+  else {
+    console.log(`You already saved ${currentPoster.title}!`);
+  }
+}
+
+function createMiniPosters() {
+  const mpi = 'miniPosterImg'
+  const mpt = 'miniPosterTitle'
+  const mpq = 'miniPosterQuote'
+  savedPosterGrid.innerHTML = '';
+  for (i = 0; i < savedPosters.length; i++) {
+    var imgOb = savedPosters[i];
+    let miniImg = `<img id="mini-poster-img${i}" src="">`;
+    let miniTitle = `<h2 id="mini-poster-title${i}"> </h2>`;
+    let miniQuote = `<h4 id="mini-poster-quote${i}"> </h4>`;
+
+    const article = document.createElement('article');
+    article.className = 'mini-poster';
+    article.innerHTML = miniImg + miniTitle + miniQuote;
+    savedPosterGrid.append(article);
+
+    eval(`var ${mpi}${i} = document.querySelector('#mini-poster-img${i}');`)
+    eval(`var ${mpt}${i} = document.querySelector('#mini-poster-title${i}');`)
+    eval(`var ${mpq}${i} = document.querySelector('#mini-poster-quote${i}');`)
+
+    eval(`${mpi}${i}`).src = imgOb.imageURL;
+    eval(`${mpt}${i}`).innerText = imgOb.title;
+    eval(`${mpq}${i}`).innerText = imgOb.quote;
+  }
+}
+
+function showSavedPosters() {
+  createMiniPosters();
+  unhideSaved();
 }
 
 function updatePoster() {
@@ -190,4 +229,5 @@ function updatePoster() {
   posterImage.src = poster.imageURL;
   posterTitle.innerText = poster.title;
   posterQuote.innerText = poster.quote;
+  currentPoster = poster;
 }
